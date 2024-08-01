@@ -14,6 +14,7 @@ let allInputs = document.querySelectorAll(".inputs input");
 let total = culculateProductPrice();
 let products = [];
 let delAllBtn = document.querySelector(".delete-all");
+let deletItemBtn = document.querySelector(".delet-item");
 
 // check if there is exist data in local storage
 if (window.localStorage.getItem("products")) {
@@ -42,6 +43,7 @@ if (window.localStorage.getItem("products")) {
                 </tr>`;
     addedArea.innerHTML += productData;
   });
+  console.log(dataFromLocalStorage[dataFromLocalStorage.length]);
   sequenceIndex = dataFromLocalStorage.length;
 }
 
@@ -115,3 +117,22 @@ function addProductToTable() {
 function addToLocal() {
   window.localStorage.setItem("products", JSON.stringify(products));
 }
+
+// delet all logic
+delAllBtn.onclick = function () {
+  products = [];
+  window.localStorage.removeItem("products");
+  window.location.reload();
+};
+
+// handle delet item btn
+addedArea.onclick = function (e) {
+  console.log(e.target);
+  if (e.target.id === "delet-item") {
+    e.target.parentElement.parentElement.remove();
+    console.log(e.target.id);
+    products.splice(+(e.target.parentElement.parentElement.id) - 1,1)
+    addToLocal()
+  }
+  console.log(products[products.length - 1].id);
+};
