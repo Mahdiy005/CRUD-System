@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUDS</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="crud">
+      <div class="title">
+        <h1>CRUDS</h1>
+        <p>Product Managment System</p>
+      </div>
+      <div class="inputs">
+        <input type="text" id="title" placeholder="title" />
+        <div class="counting">
+          <input type="number" id="price" placeholder="price" />
+          <input type="number" id="taxs" placeholder="taxs" />
+          <input type="number" id="ads" placeholder="ads" />
+          <input type="number" id="discount" placeholder="discount" />
+          <div class="total">Total: <span>20</span></div>
+        </div>
+        <input type="number" id="mount" placeholder="mount" />
+        <input type="text" id="category" placeholder="category" />
+        <button class="creat">Create</button>
+      </div>
+      <div class="outputs">
+        <div class="output-block">
+          <input type="text" id="search" placeholder="search" />
+          <div class="search-by-btns">
+            <button class="by-title">Search By Title</button>
+            <button class="by-category">Search By Category</button>
+          </div>
+          <button class="delete-all">Delete All ( <span>10</span> )</button>
+          <div class="table">
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Prices</th>
+                  <th scope="col">Taxes</th>
+                  <th scope="col">Ads</th>
+                  <th scope="col">Discount</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Update</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>IPhone</td>
+                  <td>300</td>
+                  <td>40</td>
+                  <td>44</td>
+                  <td>phone</td>
+                  <td>phone</td>
+                  <td><span id="update-item">update</span></td>
+                  <td><span id="delet-item">delete</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>
