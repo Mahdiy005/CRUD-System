@@ -153,10 +153,6 @@ th {
   text-transform: uppercase;
 }
 
-.delete-all {
-  display: none;
-}
-
 /* add responsiv  */
 @media (max-width: 767px) {
   .crud .inputs .counting {
