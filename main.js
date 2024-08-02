@@ -1,117 +1,148 @@
-// selectors
+// selct all inputs
+let title = document.getElementById("title");
+let price = document.getElementById("price");
+let taxs = document.getElementById("taxs");
+let ads = document.getElementById("ads");
+let discount = document.getElementById("discount");
+let mount = document.getElementById("mount");
+let category = document.getElementById("category");
+let total = document.querySelector(".total");
+let culculationFeilds = document.querySelectorAll(".counting input");
 let creatBtn = document.querySelector(".creat");
-let title = document.querySelector("#title");
-let price = document.querySelector("#price");
-let taxs = document.querySelector("#taxs");
-let ads = document.querySelector("#ads");
-let mount = document.querySelector("#mount");
-let category = document.querySelector("#category");
-let discount = document.querySelector("#discount");
-let totalPriceArea = document.querySelector(".total span");
-let addedArea = document.querySelector("tbody");
-let sequenceIndex = 0;
-let allInputs = document.querySelectorAll(".inputs input");
-let total = culculateProductPrice();
 let products = [];
-let delAllBtn = document.querySelector(".delete-all");
+let delItem = document.querySelector("#delet-item");
+let updateItem = document.querySelector("#update-item");
+let delAll = document.querySelector(".delete-all");
 
-// check if there is exist data in local storage
 if (window.localStorage.getItem("products")) {
-  let dataFromLocalStorage = JSON.parse(
-    window.localStorage.getItem("products")
-  );
-  // console.log(dataFromLocalStorage);
-
-  dataFromLocalStorage.forEach((item) => {
-    products.push(item);
+  products = JSON.parse(window.localStorage.getItem("products"));
+}
+displayData();
+// culc price of product
+culculationFeilds.forEach((input) => {
+  input.addEventListener("input", function () {
+    if (price.value) {
+      total.children[0].innerHTML =
+        +price.value + +taxs.value + +ads.value - +discount.value;
+    } else {
+      total.children[0].innerHTML = "0";
+    }
   });
-  // appear delete all button
-  delAllBtn.style.display = "block";
-  delAllBtn.children[0].innerHTML = products.length;
-  dataFromLocalStorage.forEach((item) => {
-    let productData = `<tr>
-                  <td>${item.id}</td>
-                  <td>${item.title}</td>
-                  <td>${item.salary}</td>
-                  <td>${item.tax}</td>
-                  <td>${item.adsense}</td>
-                  <td>${item.disco}</td>
-                  <td>${item.cat}</td>
+});
+
+// handle data and store it into local storage
+creatBtn.onclick = function () {
+  for (let i = 0; i < +mount.value; i++) {
+    let productData = {
+      title: title.value,
+      price: price.value || 0,
+      taxs: taxs.value || 0,
+      ads: ads.value || 0,
+      discount: discount.value || 0,
+      cat: category.value || "Unknown",
+    };
+    products.push(productData);
+  }
+  console.log(products);
+  window.localStorage.setItem("products", JSON.stringify(products));
+
+  // display data
+  displayData();
+
+  // clear inputs
+  clearInputs();
+
+  // display delete all
+  delAll.style.display = "block";
+  delAll.children[0].innerHTML = products.length;
+};
+
+// clear all fields
+function clearInputs() {
+  let allFeilds = document.querySelectorAll(".inputs input");
+  allFeilds.forEach((item) => {
+    item.value = "";
+  });
+  total.children[0].innerHTML = "0";
+}
+
+// display data
+function displayData() {
+  let addedArea = document.querySelector("tbody");
+  addedArea.innerHTML = "";
+  for (let i = 0; i < products.length; i++) {
+    let productDiv = `<tr>
+                  <td>${i + 1}</td>
+                  <td>${products[i].title}</td>
+                  <td>${products[i].price}</td>
+                  <td>${products[i].taxs}</td>
+                  <td>${products[i].ads}</td>
+                  <td>${products[i].discount}</td>
+                  <td>${products[i].cat}</td>
                   <td><span id="update-item">update</span></td>
                   <td><span id="delet-item">delete</span></td>
                 </tr>`;
-    addedArea.innerHTML += productData;
-  });
-  sequenceIndex = dataFromLocalStorage.length;
+    addedArea.innerHTML += productDiv;
+  }
 }
 
-// add culculate price whn input
-allInputs.forEach((input) => {
-  input.oninput = function () {
-    if (price.value && taxs.value && ads.value)
-      totalPriceArea.innerHTML =
-        +price.value + +taxs.value + +ads.value - discount.value;
-    else {
-      totalPriceArea.innerHTML = "";
-    }
-  };
-});
-// add data when click button create
-creatBtn.onclick = function () {
-  addProductToTable();
-  allInputs.forEach((input) => (input.value = ""));
-  totalPriceArea.innerHTML = "";
-  addToLocal();
-  if (products) {
-    delAllBtn.style.display = "block";
-    delAllBtn.children[0].innerHTML = products.length;
+// delete item
+document.querySelector("tbody").onclick = function (e) {
+  if (e.target.id == "delet-item") {
+    let currentIndex = Array.from(
+      document.querySelectorAll("tbody tr")
+    ).indexOf(e.target.parentElement.parentElement);
+    products = products.filter((item, index) => {
+      return !(index === currentIndex);
+    });
+
+    displayData();
+    window.localStorage.setItem("products", JSON.stringify(products));
   }
 };
 
-// functions
-// calculate price of the product
-function culculateProductPrice() {
-  return +price.value + +taxs.value + +ads.value - +discount.value;
-}
-// display data into page
-function addProductToTable() {
-  let titleVal = title.value;
-  let mountVal = mount.value;
-  let catVal = category.value;
-  let total = culculateProductPrice();
-  let allTotalInputs = document.querySelectorAll(".counting input");
-  if (document.querySelectorAll("tbody tr")) {
-    sequenceIndex = document.querySelectorAll("tbody tr").length;
-  } else {
-    sequenceIndex = 0;
+// update button
+document.querySelector("tbody").addEventListener("click", function (e) {
+  if (e.target.id == "update-item") {
+    document.querySelector(".update").style.left = "0";
+    creatBtn.style.left = "100%";
+    let currentIndex = Array.from(
+      document.querySelectorAll("tbody tr")
+    ).indexOf(e.target.parentElement.parentElement);
+    title.value = products[currentIndex].title;
+    price.value = products[currentIndex].price;
+    taxs.value = products[currentIndex].taxs;
+    ads.value = products[currentIndex].ads;
+    discount.value = products[currentIndex].discount;
+    category.value = products[currentIndex].cat;
+    total.children[0].innerHTML =
+      +price.value + +taxs.value + +ads.value - +discount.value;
+    mount.style.pointerEvents = "none";
+    mount.style.opacity = "0.6";
+    // when click update button
+    document.querySelector(".update").addEventListener("click", (e) => {
+      document.querySelector(".update").style.left = "-103%";
+      creatBtn.style.left = "0";
+      mount.style.pointerEvents = "all";
+      mount.style.opacity = "1";
+      products[currentIndex].title = title.value;
+      console.log(products[currentIndex].title);
+      products[currentIndex].price = price.value;
+      products[currentIndex].taxs = taxs.value;
+      products[currentIndex].ads = ads.value;
+      products[currentIndex].discount = discount.value;
+      products[currentIndex].cat = category.value;
+      displayData();
+      window.localStorage.setItem("products", JSON.stringify(products));
+      clearInputs();
+    });
   }
-  for (let i = sequenceIndex; i < sequenceIndex + +mountVal; i++) {
-    let productData = `<tr>
-                  <td>${i + 1}</td>
-                  <td>${titleVal}</td>
-                  <td>${total}</td>
-                  <td>${taxs.value}</td>
-                  <td>${ads.value}</td>
-                  <td>${discount.value}</td>
-                  <td>${catVal}</td>
-                  <td><span id="update-item">update</span></td>
-                  <td><span id="delet-item">delete</span></td>
-                </tr>`;
-    addedArea.innerHTML += productData;
-    let productInfo = {
-      id: i + 1,
-      title: titleVal,
-      salary: total,
-      tax: taxs.value,
-      adsense: ads.value,
-      disco: discount.value,
-      cat: catVal,
-    };
-    products.push(productInfo);
-  }
-}
+});
 
-// add to local storage
-function addToLocal() {
+// delete all items
+delAll.onclick = function () {
+  products = [];
   window.localStorage.setItem("products", JSON.stringify(products));
-}
+  displayData();
+  delAll.style.display = "none";
+};
