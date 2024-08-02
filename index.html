@@ -1,311 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Mahdi</title>
-    <!-- link to normalize -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <!-- link to all  -->
-    <link rel="stylesheet" href="css/all.min.css">
-    <!-- link to main css file -->
-    <link rel="stylesheet" href="css/master.css">
-    <!-- google fonts for logo -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUDS</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+NG+Modern:wght@100..400&display=swap"
-        rel="stylesheet">
-    <!-- google fonts for main style -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+NG+Modern:wght@100..400&display=swap"
-        rel="stylesheet">
-</head>
-
-<body>
-    <!-- start header -->
-    <div class="header" id="header">
-        <span class="pregress" style="width: 0;"></span>
-        <div class="container">
-            <div class="logo">Mohamed <span>Mahdi</span></div>
-            <nav>
-                <div class="icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <ul class="links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="crud">
+      <div class="title">
+        <h1>CRUDS</h1>
+        <p>Product Managment System</p>
+      </div>
+      <div class="inputs">
+        <input type="text" id="title" placeholder="title" />
+        <div class="counting">
+          <input type="number" id="price" placeholder="price" />
+          <input type="number" id="taxs" placeholder="taxs" />
+          <input type="number" id="ads" placeholder="ads" />
+          <input type="number" id="discount" placeholder="discount" />
+          <div class="total">Total: <span>0</span></div>
         </div>
+        <input type="number" id="mount" placeholder="mount" />
+        <input type="text" id="category" placeholder="category" />
+        <div class="del-or-up">
+          <button class="creat">Create</button>
+          <button class="update">Update</button>
+        </div>
+      </div>
+      <div class="outputs">
+        <div class="output-block">
+          <input type="text" id="search" placeholder="search" />
+          <div class="search-by-btns">
+            <button class="by-title">Search By Title</button>
+            <button class="by-category">Search By Category</button>
+          </div>
+          <button style="display: none" class="delete-all">
+            Delete All ( <span>10</span> )
+          </button>
+          <div class="table">
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Prices</th>
+                  <th scope="col">Taxes</th>
+                  <th scope="col">Ads</th>
+                  <th scope="col">Discount</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Update</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <tr>
+                  <td>1</td>
+                  <td>IPhone</td>
+                  <td>300</td>
+                  <td>40</td>
+                  <td>44</td>
+                  <td>phone</td>
+                  <td>phone</td>
+                  <td><span id="update-item">update</span></td>
+                  <td><span id="delet-item">delete</span></td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- end header -->
-    <!-- start Home -->
-    <div class="home" id="home">
-        <div class="container">
-            <div class="text">
-                <p>HI There, I'm</p>
-                <h1>Mohamed Mahdi</h1>
-                <p class="title">Backend Engineer</p>
-                <div class="social">
-                    <a href=""><i class="fa-brands fa-linkedin"></i></a>
-                    <a href=""><i class="fa-brands fa-github"></i></a>
-                    <a href=""><i class="fa-brands fa-youtube"></i></a>
-                </div>
-                <a href="#about" class="about-more">About me <span><i
-                            class="fa-solid fa-arrow-down fa-beat"></i></span></a>
-            </div>
-            <img src="https://camo.githubusercontent.com/5352b6b2b973a416adb9f788796e6e861e6ff286d2d83780df8ef7d90d4ca349/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f53576f536b4e36447854737a71494b4571762f67697068792e676966" alt="image">
-            
-        </div>
-    </div>
-    <!-- end Home -->
-    <!-- start about me -->
-    <div class="aboutme" id="about">
-        <div class="container">
-            <h3 class="special-heading">About Me</h3>
-            <div class="about-content">
-                <div class="job-info">
-                    <h2>I'm <span>Mohamed Mahdi</span>, Backend developer</h2>
-                    <p>I am <span>Mohamed Mahdi</span>, a student at the Faculty of Computers and Information, Beni Suef
-                        University,
-                        Department of Information Technology, third year. I offer services for website development,
-                        especially backend development, and creating APIs for mobile and web applications.</p>
-                    <p>My goal is simple to demystify the complexities of web development for beginners, making it an
-                        accessible and enjoyable journey for all</p>
-                </div>
-                <div class="personal-info">
-                    <ul>
-                        <li><span>Age :</span> 21</li>
-                        <li><span>email :</span> <a
-                                href="mailto:mohamedibrahimahmedmahdi@gmail.com">contact@mail.com</a></li>
-                        <li><span>Place : </span>Beni Suef - Egypt</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end about me -->
-    <!-- start skills -->
-    <div class="skills" id="skills">
-        <div class="container">
-            <h3 class="special-heading">
-                <span><i class="fa-solid fa-laptop-code"></i> Skills &</span> <span>Abilities</span>
-            </h3>
-            <div class="skills-content">
-                <div class="box">
-                    <i class="fa-brands fa-html5 fa-beat"></i>
-                    <p>HTML</p>
-                </div>
-                <div class="box">
-                    <i class="fa-brands fa-css3-alt fa-beat"></i>
-                    <p>CSS</p>
-                </div>
-                <div class="box">
-                    <i class="fa-brands fa-js fa-beat"></i>
-                    <p>Java Script</p>
-                </div>
-                <div class="box">
-                    <i class="fa-brands fa-bootstrap fa-beat"></i>
-                    <p>AJAX</p>
-                </div>
-                <div class="box">
-                    <i class="fa-brands fa-bootstrap fa-beat"></i>
-                    <p>MySQL</p>
-                </div>
-                <div class="box">
-                    <i class="fa-brands fa-php fa-beat"></i>
-                    <p>PHP</p>
-                </div>
-                <div class="box">
-                    <i class="fa-brands fa-laravel fa-beat"></i>
-                    <p>Laravel</p>
-                </div>
-                <div class="box">
-                    <i class="fa-brands fa-git fa-beat"></i>
-                    <p>Git</p>
-                </div>
-                <div class="box">
-                    <i class="fa-brands fa-github fa-beat"></i>
-                    <p>Github</p>
-                </div>
-                <div class="box">
-                    <i class="fa-brands fa-wordpress fa-beat"></i>
-                    <p>Wordpress</p>
-                </div>
-                <div class="box">
-                    <i class="fa-solid fa-c fa-beat"></i>
-                    <p>C++</p>
-                </div>
-                <div class="box">
-                    <i class="fa-solid fa-c fa-beat"></i>
-                    <p>Linux</p>
-                </div>
-                <div class="box">
-                    <i class="fa-solid fa-c fa-beat"></i>
-                    <p>Networking</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end skills -->
-    <!-- start my education -->
-    <div class="edu">
-        <div class="container">
-            <h3 class="special-heading">
-                <span><i class="fa-solid fa-graduation-cap"></i> My</span>
-                <span>Education</span>
-            </h3>
-            <p>Education Is Not The Learning Of Facts, But The Training Of The Mind To Think. </p>
-            <div class="card">
-                <img src="images/edu2.png" alt="">
-                <div class="info">
-                    <h4>Bachelor of Computer Science in Information Technology </h4>
-                    <p>Misr University For Science & Technology </p>
-                    <p>CGPA: 3.66 </p>
-                    <p>2019 - 2023 </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end my education -->
-    <!-- start projects  -->
-    <div class="projects" id="projects">
-        <div class="container">
-            <h3 class="special-heading">
-                <span><i class="fa-solid fa-laptop-code"></i> My</span> <span>Projects</span>
-            </h3>
-            <div class="project-content">
-                <div class="card">
-                    <img src="./images/special-site.png" alt="">
-                    <div class="text">
-                        <h3>Special Design</h3>
-                        <p>The first real application i using HTML CSS JS. used Local Storage</p>
-                        <div class="row">
-                            <a target="_blank" href="https://mahdiy005.github.io/Template-1-JS/" class="live">Live
-                                Demo</a>
-                            <span class="technology">HTML ,CSS, JS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/cruds.png" alt="">
-                    <div class="text">
-                        <h3>Product Managment</h3>
-                        <p>Deal With Creation, Update, Delete and Search using javascript </p>
-                        <div class="row">
-                            <a target="_blank" href="https://mahdiy005.github.io/CRUD-System/" class="live">Live
-                                Demo</a>
-                            <span class="technology">HTML ,CSS ,JS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/KasperTemp.png" alt="">
-                    <div class="text">
-                        <h3>Ksper Template</h3>
-                        <p>very useful template to practic on grid system and Slider Page Added to landing</p>
-                        <div class="row">
-                            <a target="_blank" href="https://mahdiy005.github.io/Template-2-HTML-CSS/" class="live">Live
-                                Demo</a>
-                            <span class="technology">HTML ,CSS ,JS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/LeonTemp.png" alt="">
-                    <div class="text">
-                        <h3>Leon Template</h3>
-                        <p>very useful template to practic on HTML and CSS only</p>
-                        <div class="row">
-                            <a target="_blank" href="https://mahdiy005.github.io/Leon-Template/" class="live">Live
-                                Demo</a>
-                            <span class="technology">HTML ,CSS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/full-site.png" alt="">
-                    <div class="text">
-                        <h3>Full Website</h3>
-                        <p>Website for client that learn me how to master animation and transition</p>
-                        <div class="row">
-                            <a target="_blank" href="https://mahdiy005.github.io/Full-Website-For-Company/"
-                                class="live">Live
-                                Demo</a>
-                            <span class="technology">HTML ,CSS ,JS</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a href="pages/allProjects.html" class="more">More</a>
-        </div>
-    </div>
-    <!-- end projects  -->
-    <!-- start contact -->
-    <div class="contact" id="contact">
-        <div class="container">
-            <h3 class="special-heading">
-                <span><i class="fa-solid fa-headset"></i> Get in</span>
-                <span>Touch</span>
-            </h3>
-            <div class="contact-content">
-                <img src="images/contact.png" alt="contact">
-                <form action="">
-                    <input class="in" type="text" name="name" placeholder="Name">
-                    <input class="in" name="email" placeholder="Email">
-                    <textarea class="in" placeholder="Message"></textarea>
-                    <input type="submit">
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- end contact -->
-    <!-- start footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="left">
-                    <h3>Mohamed Mahdi</h3>
-                    <p>Welcome to my Portfolio! ❤️ I'm glad you're interested in getting in touch with me. </p>
-                    <p>If you have any questions, comments, or just want to say hello, you can use the contact form
-                        above. </p>
-                </div>
-                <div class="middle">
-                    <h3>Quick Links </h3>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="right">
-                    <h3>Find Me on Social Media </h3>
-                    <div class="social">
-                        <a href=""><i class="fa-brands fa-linkedin"></i></a>
-                        <a href=""><i class="fa-brands fa-github"></i></a>
-                        <a href=""><i class="fa-brands fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="tail">
-                © 2024 | All rights reserved
-            </div>
-        </div>
-    </footer>
-    <!-- end footer -->
-    <script src="https://unpkg.com/headroom.js/dist/headroom.min.js"></script>
     <script src="./main.js"></script>
-</body>
-
+  </body>
 </html>
