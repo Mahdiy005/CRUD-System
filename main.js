@@ -42,21 +42,25 @@ creatBtn.onclick = function () {
     discount: discount.value || 0,
     cat: category.value || "Unknown",
   };
-  if (mood === "create") {
-    if (+mount.value > 1) {
-      for (let i = 0; i < mount.value; i++) {
+  if (title.value && price.value && mount.value < 100 && category.value) {
+    if (mood === "create") {
+      if (+mount.value > 1) {
+        for (let i = 0; i < mount.value; i++) {
+          products.push(productData);
+        }
+      } else {
         products.push(productData);
       }
     } else {
-      products.push(productData);
+      products[temp] = productData;
+      mood = "create";
+      creatBtn.innerHTML = "Create";
+      mount.style.pointerEvents = "all";
+      mount.style.cursor = "auto";
+      mount.style.opacity = "1";
     }
-  } else {
-    products[temp] = productData;
-    mood = "create";
-    creatBtn.innerHTML = "Create";
-    mount.style.pointerEvents = "all";
-    mount.style.cursor = "auto";
-    mount.style.opacity = "1";
+      // clear inputs
+  clearInputs();
   }
 
   window.localStorage.setItem("products", JSON.stringify(products));
@@ -64,8 +68,7 @@ creatBtn.onclick = function () {
   // display data
   displayData();
 
-  // clear inputs
-  clearInputs();
+
 
   // display delete all
   delAll.style.display = "block";
@@ -149,4 +152,66 @@ delAll.onclick = function () {
   products = [];
   window.localStorage.setItem("products", JSON.stringify(products));
   displayData();
+};
+
+// search handling
+let searchMood = "title";
+let searchOptionsBtn = document.querySelectorAll(".search-by-btns button");
+searchOptionsBtn.forEach((btn) => {
+  btn.addEventListener("click", function () {
+
+    if (this.className === "by-title") {
+      searchMood = "title";
+      document.querySelector("#search").placeholder = "search by title";
+    } else {
+      searchMood = "category";
+      document.querySelector("#search").placeholder = "search by category";
+    }
+    document.querySelector("#search").focus();
+    document.querySelector('#search').value=""
+    displayData()
+  });
+});
+
+document.querySelector("#search").oninput = function () {
+  let addedArea = document.querySelector("tbody");
+  addedArea.innerHTML = "";
+  if (searchMood === "title") {
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].title.includes(this.value)) {
+        let productDiv = `
+                <tr>
+                  <td scop="row">${i + 1}</td>
+                  <td>${products[i].title}</td>
+                  <td>${products[i].price}</td>
+                  <td>${products[i].taxs}</td>
+                  <td>${products[i].ads}</td>
+                  <td>${products[i].discount}</td>
+                  <td>${products[i].cat}</td>
+                  <td><span onclick="updateItem(${i})" id="update-item">update</span></td>
+                  <td><span  id="delet-item">delete</span></td>
+                </tr>`;
+        addedArea.innerHTML += productDiv;
+      }
+    }
+  } else {
+    let regex = new RegExp(this.value,"ig");
+    for (let i = 0; i < products.length; i++) {
+      if (regex.test(products[i].cat)) {
+        let productDiv = `
+                <tr>
+                  <td scop="row">${i + 1}</td>
+                  <td>${products[i].title}</td>
+                  <td>${products[i].price}</td>
+                  <td>${products[i].taxs}</td>
+                  <td>${products[i].ads}</td>
+                  <td>${products[i].discount}</td>
+                  <td>${products[i].cat}</td>
+                  <td><span onclick="updateItem(${i})" id="update-item">update</span></td>
+                  <td><span  id="delet-item">delete</span></td>
+                </tr>`;
+        addedArea.innerHTML += productDiv;
+      }
+    }
+  }
 };
