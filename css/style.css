@@ -104,9 +104,12 @@ button {
   -moz-transition: 0.1s;
   -ms-transition: 0.1s;
   -o-transition: 0.1s;
+  width: 100%;
+  outline: none;
 }
 button:hover {
   letter-spacing: 2px;
+  outline: none;
 }
 
 
@@ -169,4 +172,28 @@ th {
   button {
     font-size: 17px;
   }
+}
+
+.delete-all {
+  display: none;
+
+}
+
+.del-or-up {
+  position: relative;
+  overflow: hidden;
+}
+.del-or-up .create{
+  position: absolute;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
+.del-or-up .update{
+  position: absolute;
+  transition: 0.3s;
+  left: -100%;
 }
